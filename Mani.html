@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manikandaa S - Data Scientist Portfolio</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure custom font (Times New Roman) and custom Tailwind colors -->
+    <style>
+        /* Removed Inter font import */
+        
+        body {
+            /* Changed font to Times New Roman for a classic look */
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        /* Custom transition utility for the Project Card detail */
+        .transition-max-height {
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        }
+
+        /* Custom animation for fading in the About section content */
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(1rem);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeIn {
+            animation: fadeInSlideUp 1s ease-out forwards;
+        }
+    </style>
+    <!-- Configuration for Lucide/Devicon Icons and Data -->
+    <script>
+        // --- CONFIGURATION: CUSTOM ICON URLS (Replaced by SVG/Placeholder logic in HTML) ---
+        // Image URLs for skills are kept.
+        const ICON_URLS = {
+            python: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", 
+            mysql: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", 
+            r: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg", 
+            powerbi: "https://raw.githubusercontent.com/Manikandaa148/photo/main/pb.jpg", 
+            excel: "https://raw.githubusercontent.com/Manikandaa148/photo/main/excel.jpg", 
+            stats: "https://raw.githubusercontent.com/Manikandaa148/photo/main/analysis.png", 
+            ml: "https://api.iconify.design/lucide/brain-circuit.svg?color=%231e40af", 
+        };
+
+        // --- RAW IMAGE URLs FOR SOCIAL ICONS ---
+        const SOCIAL_IMAGE_URLS = {
+            github: "https://raw.githubusercontent.com/Manikandaa148/photo/main/github.png",
+            linkedin: "https://raw.githubusercontent.com/Manikandaa148/photo/main/linkedin.png",
+        };
+
+        // --- CONFIGURATION: PORTFOLIO DATA ---
+        const PORTFOLIO_DATA = {
+            profession: "Data Scientist & Statistical Analyst",
+            name: "Manikandaa S",
+            tagline: "Bridging statistical theory with actionable data insights.",
+            social: {
+                github: "https://github.com/Manikandaa148", 
+                linkedin: "https://www.linkedin.com/in/manikandaa-s-aa676225a",
+                email: "mailto:manikandaa944@gmail.com",
+            },
+            projects: [
+                { 
+                    id: 1, 
+                    type: "Internship", 
+                    title: "Crop Estimation & Data Management System", 
+                    description: "Developed procedures for precise crop estimation and streamlined data management using government software during an internship at the District Statistical Office, Trichy.", 
+                    tags: ["Statistics", "Data Management", "R", "Survey Analysis"],
+                    iconClass: "M3 3v18h18",
+                },
+                { 
+                    id: 2, 
+                    type: "Project", 
+                    title: "Cybercrime Awareness Analysis Project", 
+                    description: "Conducted a statistical analysis of public awareness regarding cybercrime, identifying key vulnerabilities and proposing digital safety improvements.", 
+                    tags: ["Code", "Numpy", "Data Analytics", "Public Safety"],
+                    iconClass: "M4 7V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3M4 17v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3M12 9v6M12 15h2a2 2 0 0 0 2-2V9M12 15h-2a2 2 0 0 1-2-2V9",
+                },
+                { 
+                    id: 3, 
+                    type: "Project", 
+                    title: "Data Analytics using Python", 
+                    description: "Completed a certified course focused on fundamental and advanced Python libraries (Pandas, Matplotlib) for end-to-end data processing and visualization.", 
+                    tags: ["Code", "Pandas", "Data Visualization", "Certification"],
+                    iconClass: "M16 18l4-4-4-4M8 6l-4 4 4 4",
+                }
+            ],
+            skills: [
+                { name: "Python", proficiency: 90, type: "Programming", icon: ICON_URLS.python },
+                { name: "MySQL", proficiency: 80, type: "Programming", icon: ICON_URLS.mysql },
+                { name: "R", proficiency: 75, type: "Programming", icon: ICON_URLS.r }, 
+                { name: "Power BI", proficiency: 85, type: "Tools", icon: ICON_URLS.powerbi }, 
+                { name: "Excel & SPSS", proficiency: 95, type: "Tools", icon: ICON_URLS.excel }, 
+                { name: "Statistical Analysis", proficiency: 98, type: "Core", icon: ICON_URLS.stats }, 
+                { name: "Machine Learning Concepts", proficiency: 70, type: "Core", icon: ICON_URLS.ml }
+            ]
+        };
+        
+        // Helper function for Lucide icons (using minimal SVG paths)
+        // Only used for the email icon and section headers now.
+        const getIconSvg = (name, classes = "w-6 h-6") => {
+            let path;
+            switch (name) {
+                case 'Github': path = 'M9 19c-5 1.5-5-2.5-7-3m14 6v-3.8c.8-.4 1.4-1.1 1.4-2.2v-7.1c0-.4-.4-.8-1.2-1.1v-.8c0-1.7-1-2-2-2.2V6c0-1.1-1.4-2-2-2s-2 .9-2 2v.8c-1 .3-2 .5-2 2.2v.8c-.8.3-1.2.7-1.2 1.1v7.1c0 1.1.6 1.8 1.4 2.2V22M9 18c-3 0-5 0-7 1.5M15 18c3 0 5 0 7 1.5'; break;
+                case 'Linkedin': path = 'M16 8a6 6 0 0 0-6-6 6 6 0 0 0-6 6v7h4v-7a2 2 0 1 1 4 0v7h4zM4 22h4V10H4z'; break;
+                case 'EmailIcon': path = 'M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zM22 6l-10 7-10-7'; break;
+                case 'Command': path = 'M18 10h-2M10 18v-2M10 6v2M6 14h2M18 14h2M14 6h-2M14 18h-2M6 10h2M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z'; break;
+                case 'Sigma': path = 'M18 6.5l-6 6 6 6M6 6.5l6 6-6 6'; break;
+                case 'Target': path = 'M12 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 12a9 9 0 1 0 0 18 9 9 0 0 0 0-18z'; break;
+                case 'FileText': path = 'M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2zM10 14h4M10 18h4M10 10h4'; break;
+                case 'ProjectIcon1': path = PORTFOLIO_DATA.projects[0].iconClass; break;
+                case 'ProjectIcon2': path = PORTFOLIO_DATA.projects[1].iconClass; break;
+                case 'ProjectIcon3': path = PORTFOLIO_DATA.projects[2].iconClass; break;
+                default: path = 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z'; // Default circle fallback
+            }
+            
+            return `
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${classes}">
+                    <path d="${path}"/>
+                </svg>
+            `;
+        };
+
+
+        // --- CORE JAVASCRIPT LOGIC ---
+
+        // 1. Smooth Scrolling Logic
+        const handleScroll = (e, id) => {
+            e.preventDefault();
+            const targetElement = document.getElementById(id);
+            if (!targetElement) return;
+
+            const startPosition = window.pageYOffset;
+            const offset = 80; // Adjusted offset for fixed nav
+            const targetPosition = targetElement.offsetTop - offset;
+            const distance = targetPosition - startPosition;
+            const duration = 1200; 
+            let startTime = null;
+
+            const easeInOutQuad = (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+            const animateScroll = (timestamp) => {
+                if (!startTime) startTime = timestamp;
+                const elapsed = timestamp - startTime;
+                const progress = Math.min(1, elapsed / duration);
+                const easedProgress = easeInOutQuad(progress);
+
+                window.scrollTo(0, startPosition + distance * easedProgress);
+
+                if (elapsed < duration) {
+                    window.requestAnimationFrame(animateScroll);
+                } else {
+                    // Update URL hash after scroll completion
+                    if (window.location.hash !== '#' + id) {
+                        window.history.pushState(null, '', '#' + id);
+                    }
+                }
+            };
+
+            window.requestAnimationFrame(animateScroll);
+        };
+
+        // 2. Component Rendering Helpers
+
+        const SocialIcons = (isNav = false) => {
+            const githubStyle = "bg-gray-700 hover:bg-gray-800 transition-all duration-200 p-2 rounded-full shadow-lg flex items-center justify-center";
+            // REMOVED background and padding/border from LinkedIn to show only the image
+            const linkedinStyle = "hover:opacity-80 transition-opacity duration-200 shadow-lg flex items-center justify-center"; 
+            const emailStyle = "bg-red-600 text-white hover:bg-red-700 transition-all duration-200 p-2 rounded-full shadow-lg";
+
+            return `
+                <div class="flex items-center space-x-3 ${isNav ? 'hidden md:flex' : 'justify-center mt-6'}">
+                    <a href="${PORTFOLIO_DATA.social.github}" target="_blank" rel="noopener noreferrer" class="${githubStyle}" title="GitHub Profile">
+                        <img 
+                            src="${SOCIAL_IMAGE_URLS.github}" 
+                            alt="GitHub Icon" 
+                            class="w-6 h-6 invert"
+                            onerror="this.onerror=null; this.src='https://placehold.co/24x24/1F2937/ffffff?text=GH';"
+                        >
+                    </a>
+                    <a href="${PORTFOLIO_DATA.social.linkedin}" target="_blank" rel="noopener noreferrer" class="${linkedinStyle}" title="LinkedIn Profile">
+                        <img 
+                            src="${SOCIAL_IMAGE_URLS.linkedin}" 
+                            alt="LinkedIn Icon" 
+                            class="w-8 h-8 object-contain"
+                            onerror="this.onerror=null; this.src='https://placehold.co/24x24/2563EB/ffffff?text=LI';"
+                        >
+                    </a>
+                    <a href="${PORTFOLIO_DATA.social.email}" class="${emailStyle}" title="Email Me">
+                        ${getIconSvg('EmailIcon', 'w-6 h-6')}
+                    </a>
+                </div>
+            `;
+        };
+
+        const SkillItem = (skill) => {
+            return `
+                <li class="flex items-center space-x-3 text-lg text-gray-700">
+                    <img 
+                        src="${skill.icon}" 
+                        alt="${skill.name} logo" 
+                        class="w-7 h-7 object-contain"
+                        onerror="this.onerror=null; this.src='https://placehold.co/28x28/1D4ED8/ffffff?text=?';" 
+                    />
+                    <span>${skill.name}</span>
+                </li>
+            `;
+        };
+
+        const ProjectCard = (project, iconIndex) => {
+            const IconName = `ProjectIcon${iconIndex + 1}`; 
+            
+            return `
+                <div 
+                    id="project-${project.id}"
+                    data-expanded="false"
+                    onclick="toggleProject(${project.id})"
+                    class="bg-white/80 backdrop-blur-sm rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer flex flex-col h-full border border-blue-100"
+                >
+                    <div class="p-5 flex-grow"> 
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 flex items-center">
+                                ${getIconSvg(IconName, 'w-6 h-6 text-blue-600 mr-3')}
+                                ${project.title}
+                            </h3>
+                            <button id="project-btn-${project.id}" class="text-blue-600 hover:text-blue-500 font-semibold text-sm">
+                                Details ▼
+                            </button>
+                        </div>
+                        
+                        <p class="text-gray-700 mb-4">${project.description}</p>
+                    </div>
+                    
+                    <div id="project-details-${project.id}" class="px-5 pb-5 pt-0 transition-max-height max-h-0 opacity-0" style="overflow: hidden;">
+                        <div class="border-t pt-4 mt-4 text-sm text-gray-700 bg-blue-100/70 p-4 rounded-lg">
+                            <p class="font-semibold mb-2 text-blue-600">Key Analysis Performed:</p>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>Involved in data collection and cleaning procedures.</li>
+                                <li>Applied key statistical models (e.g., Regression, Estimation).</li>
+                                <li>Generated Power BI/Excel reports for stakeholders.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="p-5 pt-0 flex flex-wrap gap-2 border-t mt-auto"> 
+                        ${project.tags.map(tag => `
+                            <span class="text-xs font-medium bg-gray-200 text-gray-700 px-3 py-1 rounded-full">
+                                ${tag}
+                            </span>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        };
+
+        // 3. Project Card Interactivity Logic
+        window.toggleProject = (id) => {
+            const card = document.getElementById(`project-${id}`);
+            const details = document.getElementById(`project-details-${id}`);
+            const button = document.getElementById(`project-btn-${id}`);
+            const isExpanded = card.getAttribute('data-expanded') === 'true';
+
+            if (isExpanded) {
+                // Collapse
+                details.style.maxHeight = '0';
+                details.classList.remove('opacity-100');
+                details.classList.add('opacity-0');
+                card.setAttribute('data-expanded', 'false');
+                button.textContent = 'Details ▼';
+            } else {
+                // Expand (use scroll height for dynamic max-height)
+                details.style.maxHeight = details.scrollHeight + 'px';
+                details.classList.remove('opacity-0');
+                details.classList.add('opacity-100');
+                card.setAttribute('data-expanded', 'true');
+                button.textContent = 'Collapse ▲';
+            }
+        };
+
+        // 4. Main Initialization Function
+        const renderPortfolio = () => {
+            const appRoot = document.getElementById('app-root');
+            if (!appRoot) return;
+
+            const programmingSkills = PORTFOLIO_DATA.skills.filter(s => s.type === 'Programming');
+            const toolsSkills = PORTFOLIO_DATA.skills.filter(s => s.type === 'Tools');
+            const coreSkills = PORTFOLIO_DATA.skills.filter(s => s.type === 'Core');
+
+            const allProjects = PORTFOLIO_DATA.projects;
+            const projectCardsHtml = allProjects.map((p, i) => ProjectCard(p, i)).join('');
+
+            appRoot.innerHTML = `
+                <!-- Navigation Component -->
+                <nav id="main-nav" class="fixed top-0 z-50 w-full bg-white/95 backdrop-blur-sm shadow-md transition-all duration-300">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-3">
+                        <h1 class="text-xl font-extrabold text-blue-600 tracking-wider hidden sm:block">
+                            ${PORTFOLIO_DATA.name.split(' ')[0]} S 
+                        </h1>
+                        <div class="flex space-x-1 sm:space-x-4">
+                            ${['home', 'about', 'skills', 'projects-section', 'contact'].map(id => `
+                                <a 
+                                    href="#${id}" 
+                                    data-target="${id}"
+                                    class="nav-link px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200 text-gray-700 hover:bg-gray-100 hover:text-blue-700" 
+                                >
+                                    ${id.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                                </a>
+                            `).join('')}
+                        </div>
+                        ${SocialIcons(true)}
+                    </div>
+                </nav>
+
+                <main>
+                    <!-- 1. HOME SECTION (Hero) -->
+                    <section id="home" class="pt-6 pb-4">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h2 class="text-4xl font-extrabold text-gray-800 mb-6 border-b-4 border-blue-600 pb-2">Welcome</h2>
+                            
+                            <div class="flex flex-col items-center text-center py-12 bg-white/90 backdrop-blur-sm shadow-2xl rounded-2xl p-8 animate-fadeIn" style="animation-delay: 0.3s;"> 
+                                
+                                <p class="text-xl font-medium text-gray-600 mb-3">Hello, I am</p>
+
+                                <h1 class="text-7xl font-extrabold text-gray-900 mb-4 tracking-tighter">
+                                    ${PORTFOLIO_DATA.name}
+                                </h1>
+                                
+                                <p class="text-4xl font-light text-blue-600 mb-6">
+                                    ${PORTFOLIO_DATA.profession}
+                                </p>
+                                
+                                <p class="text-xl max-w-4xl text-gray-700 mb-8 px-4">
+                                    ${PORTFOLIO_DATA.tagline}
+                                </p>
+                                <a 
+                                    href="#projects-section"
+                                    data-target="projects-section"
+                                    class="nav-link bg-blue-600 text-white px-10 py-4 rounded-full text-xl font-semibold shadow-xl hover:bg-blue-700 transition duration-300 transform hover:scale-105"
+                                >
+                                    Explore My Work &rarr;
+                                </a>
+                                ${SocialIcons(false)}
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 2. ABOUT SECTION -->
+                    <section id="about" class="pt-6 pb-4">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h2 class="text-4xl font-extrabold text-gray-800 mb-6 border-b-4 border-blue-600 pb-2">About Me</h2>
+                            <div class="grid md:grid-cols-3 gap-8 transition-opacity duration-1000 ease-out transform opacity-100 translate-y-0">
+                                <div class="md:col-span-2 bg-white/80 p-8 rounded-xl shadow-lg">
+                                    <p class="text-lg leading-relaxed mb-4 text-gray-700">
+                                        I am currently pursuing an M.Sc. in Data Science with a strong foundation in B.Sc. Statistics. My education has equipped me with robust analytical and quantitative skills necessary to tackle complex data problems.
+                                    </p>
+                                    <p class="text-lg leading-relaxed mb-4 text-gray-700">
+                                        My professional experience includes hands-on data management and statistical analysis during my internship at the Collector Office, District Statistical Office, Trichy. I have practical skills in areas like crop estimation, data collection, and leveraging tools like Power BI and Code for impactful analysis.
+                                    </p>
+                                    <p class="text-lg leading-relaxed text-gray-700">
+                                        I am driven by the intersection of statistical rigor and practical application, aiming to transform raw data into clear, actionable insights for data-driven projects.
+                                    </p>
+                                </div>
+                                <div class="md:col-span-1 bg-gray-100/90 p-6 rounded-xl shadow-md">
+                                    <h3 class="text-2xl font-bold mb-4 text-gray-800 border-b pb-2">Details</h3>
+                                    <ul class="space-y-3 text-gray-700">
+                                        <li><span class="font-semibold text-blue-600">M.Sc. Data Science:</span> Bharathidasan University</li>
+                                        <li><span class="font-semibold text-blue-600">B.Sc. Statistics:</span> St. Joseph's College (77.32%)</li>
+                                        <li><span class="font-semibold text-blue-600">Location:</span> Mannachanallur, Trichy</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 3. SKILLS SECTION -->
+                    <section id="skills" class="pt-6 pb-4">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h2 class="text-4xl font-extrabold text-gray-800 mb-6 border-b-4 border-blue-600 pb-2">Technical Skills</h2>
+                            <div class="grid md:grid-cols-3 gap-6">
+                                <!-- Programming Skills -->
+                                <div class="bg-white/80 p-6 rounded-xl shadow-lg"> 
+                                    <h3 class="text-2xl font-bold text-gray-800 mb-4 text-blue-600 flex items-center">
+                                        ${getIconSvg('Command', 'w-6 h-6 mr-3')} Programming Languages
+                                    </h3>
+                                    <ul class="list-disc list-inside space-y-2 text-lg text-gray-700 list-none pl-0">
+                                        ${programmingSkills.map(SkillItem).join('')}
+                                    </ul>
+                                </div>
+
+                                <!-- Core Analytical Skills -->
+                                <div class="bg-white/80 p-6 rounded-xl shadow-lg"> 
+                                    <h3 class="text-2xl font-bold text-gray-800 mb-4 text-blue-600 flex items-center">
+                                        ${getIconSvg('Sigma', 'w-6 h-6 mr-3')} Core Concepts
+                                    </h3>
+                                    <ul class="list-disc list-inside space-y-2 text-lg text-gray-700 list-none pl-0">
+                                        ${coreSkills.map(SkillItem).join('')}
+                                    </ul>
+                                </div>
+
+                                <!-- Tools and Software -->
+                                <div class="bg-white/80 p-6 rounded-xl shadow-lg"> 
+                                    <h3 class="text-2xl font-bold text-gray-800 mb-4 text-blue-600 flex items-center">
+                                        ${getIconSvg('Target', 'w-6 h-6 mr-3')} Tools & Platforms
+                                    </h3>
+                                    <ul class="list-disc list-inside space-y-2 text-lg text-gray-700 list-none pl-0">
+                                        ${toolsSkills.map(SkillItem).join('')}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 4. PROJECTS SECTION -->
+                    <section id="projects-section" class="pt-6 pb-4">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h2 class="text-4xl font-extrabold text-gray-800 mb-6 border-b-4 border-blue-600 pb-2">Projects & Internship</h2>
+                            
+                            <!-- Display all projects in one grid -->
+                            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                                ${projectCardsHtml}
+                            </div>
+
+                            <p class="mt-6 text-center text-gray-600 text-lg">
+                                Click on any card to expand the details of the work performed.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- 5. CONTACT SECTION -->
+                    <section id="contact" class="pt-6 pb-4">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h2 class="text-4xl font-extrabold text-gray-800 mb-6 border-b-4 border-blue-600 pb-2">Get in Touch</h2>
+                            <div class="max-w-xl mx-auto text-center bg-white/90 p-6 rounded-xl shadow-2xl">
+                                <p class="text-xl mb-6 text-gray-700">
+                                    I am actively seeking internship opportunities to apply my Data Science skills.
+                                    Connect with me to discuss data-driven projects or potential collaborations.
+                                </p>
+                                <a 
+                                    href="${PORTFOLIO_DATA.social.email}"
+                                    class="inline-flex items-center bg-green-600 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-md hover:bg-green-700 transition duration-300"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zM22 6l-10 7-10-7"/></svg>
+                                    Email Now
+                                </a>
+                                ${SocialIcons(false)}
+                            </div>
+                        </div>
+                    </section>
+                </main>
+
+                <!-- Footer -->
+                <footer class="bg-gray-900 text-white text-center p-6 mt-0">
+                    <p class="text-sm">&copy; ${new Date().getFullYear()} ${PORTFOLIO_DATA.name}. Built with Vanilla JS and Tailwind CSS.</p>
+                </footer>
+            `;
+
+            // Attach scroll event listeners after content is rendered
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    handleScroll(e, link.getAttribute('data-target'));
+                });
+            });
+        };
+
+        // Initialize the app when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', renderPortfolio);
+    </script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-400 text-gray-900 pt-[70px]">
+    <!-- The JavaScript will render the entire application content into this root div -->
+    <div id="app-root">
+        <!-- Content will be inserted here by JavaScript -->
+    </div>
+</body>
+</html>
